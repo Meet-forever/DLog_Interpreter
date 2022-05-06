@@ -1,0 +1,337 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> dlogStart
+Rule 1     dlogStart -> dlog DOT
+Rule 2     dlog -> lhs EQ rhs
+Rule 3     lhs -> lhs_formula
+Rule 4     lhs_formula -> ID LPRN list1 RPRN
+Rule 5     list1 -> list1 COMMA ID
+Rule 6     list1 -> ID
+Rule 7     rhs -> rhs COMMA atomic
+Rule 8     rhs -> atomic
+Rule 9     atomic -> positive
+Rule 10    atomic -> negation
+Rule 11    positive -> rhs_formula
+Rule 12    negation -> NOT rhs_formula
+Rule 13    rhs_formula -> ID LPRN list2 RPRN
+Rule 14    list2 -> list2 COMMA ID
+Rule 15    list2 -> list2 COMMA NUM
+Rule 16    list2 -> ID
+Rule 17    list2 -> NUM
+
+Terminals, with rules where they appear
+
+COMMA                : 5 7 14 15
+DOT                  : 1
+EQ                   : 2
+ID                   : 4 5 6 13 14 16
+LPRN                 : 4 13
+NOT                  : 12
+NUM                  : 15 17
+RPRN                 : 4 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+atomic               : 7 8
+dlog                 : 1
+dlogStart            : 0
+lhs                  : 2
+lhs_formula          : 3
+list1                : 4 5
+list2                : 13 14 15
+negation             : 10
+positive             : 9
+rhs                  : 2 7
+rhs_formula          : 11 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . dlogStart
+    (1) dlogStart -> . dlog DOT
+    (2) dlog -> . lhs EQ rhs
+    (3) lhs -> . lhs_formula
+    (4) lhs_formula -> . ID LPRN list1 RPRN
+
+    ID              shift and go to state 5
+
+    dlogStart                      shift and go to state 1
+    dlog                           shift and go to state 2
+    lhs                            shift and go to state 3
+    lhs_formula                    shift and go to state 4
+
+state 1
+
+    (0) S' -> dlogStart .
+
+
+
+state 2
+
+    (1) dlogStart -> dlog . DOT
+
+    DOT             shift and go to state 6
+
+
+state 3
+
+    (2) dlog -> lhs . EQ rhs
+
+    EQ              shift and go to state 7
+
+
+state 4
+
+    (3) lhs -> lhs_formula .
+
+    EQ              reduce using rule 3 (lhs -> lhs_formula .)
+
+
+state 5
+
+    (4) lhs_formula -> ID . LPRN list1 RPRN
+
+    LPRN            shift and go to state 8
+
+
+state 6
+
+    (1) dlogStart -> dlog DOT .
+
+    $end            reduce using rule 1 (dlogStart -> dlog DOT .)
+
+
+state 7
+
+    (2) dlog -> lhs EQ . rhs
+    (7) rhs -> . rhs COMMA atomic
+    (8) rhs -> . atomic
+    (9) atomic -> . positive
+    (10) atomic -> . negation
+    (11) positive -> . rhs_formula
+    (12) negation -> . NOT rhs_formula
+    (13) rhs_formula -> . ID LPRN list2 RPRN
+
+    NOT             shift and go to state 14
+    ID              shift and go to state 15
+
+    rhs                            shift and go to state 9
+    atomic                         shift and go to state 10
+    positive                       shift and go to state 11
+    negation                       shift and go to state 12
+    rhs_formula                    shift and go to state 13
+
+state 8
+
+    (4) lhs_formula -> ID LPRN . list1 RPRN
+    (5) list1 -> . list1 COMMA ID
+    (6) list1 -> . ID
+
+    ID              shift and go to state 16
+
+    list1                          shift and go to state 17
+
+state 9
+
+    (2) dlog -> lhs EQ rhs .
+    (7) rhs -> rhs . COMMA atomic
+
+    DOT             reduce using rule 2 (dlog -> lhs EQ rhs .)
+    COMMA           shift and go to state 18
+
+
+state 10
+
+    (8) rhs -> atomic .
+
+    COMMA           reduce using rule 8 (rhs -> atomic .)
+    DOT             reduce using rule 8 (rhs -> atomic .)
+
+
+state 11
+
+    (9) atomic -> positive .
+
+    COMMA           reduce using rule 9 (atomic -> positive .)
+    DOT             reduce using rule 9 (atomic -> positive .)
+
+
+state 12
+
+    (10) atomic -> negation .
+
+    COMMA           reduce using rule 10 (atomic -> negation .)
+    DOT             reduce using rule 10 (atomic -> negation .)
+
+
+state 13
+
+    (11) positive -> rhs_formula .
+
+    COMMA           reduce using rule 11 (positive -> rhs_formula .)
+    DOT             reduce using rule 11 (positive -> rhs_formula .)
+
+
+state 14
+
+    (12) negation -> NOT . rhs_formula
+    (13) rhs_formula -> . ID LPRN list2 RPRN
+
+    ID              shift and go to state 15
+
+    rhs_formula                    shift and go to state 19
+
+state 15
+
+    (13) rhs_formula -> ID . LPRN list2 RPRN
+
+    LPRN            shift and go to state 20
+
+
+state 16
+
+    (6) list1 -> ID .
+
+    RPRN            reduce using rule 6 (list1 -> ID .)
+    COMMA           reduce using rule 6 (list1 -> ID .)
+
+
+state 17
+
+    (4) lhs_formula -> ID LPRN list1 . RPRN
+    (5) list1 -> list1 . COMMA ID
+
+    RPRN            shift and go to state 21
+    COMMA           shift and go to state 22
+
+
+state 18
+
+    (7) rhs -> rhs COMMA . atomic
+    (9) atomic -> . positive
+    (10) atomic -> . negation
+    (11) positive -> . rhs_formula
+    (12) negation -> . NOT rhs_formula
+    (13) rhs_formula -> . ID LPRN list2 RPRN
+
+    NOT             shift and go to state 14
+    ID              shift and go to state 15
+
+    atomic                         shift and go to state 23
+    positive                       shift and go to state 11
+    negation                       shift and go to state 12
+    rhs_formula                    shift and go to state 13
+
+state 19
+
+    (12) negation -> NOT rhs_formula .
+
+    COMMA           reduce using rule 12 (negation -> NOT rhs_formula .)
+    DOT             reduce using rule 12 (negation -> NOT rhs_formula .)
+
+
+state 20
+
+    (13) rhs_formula -> ID LPRN . list2 RPRN
+    (14) list2 -> . list2 COMMA ID
+    (15) list2 -> . list2 COMMA NUM
+    (16) list2 -> . ID
+    (17) list2 -> . NUM
+
+    ID              shift and go to state 24
+    NUM             shift and go to state 26
+
+    list2                          shift and go to state 25
+
+state 21
+
+    (4) lhs_formula -> ID LPRN list1 RPRN .
+
+    EQ              reduce using rule 4 (lhs_formula -> ID LPRN list1 RPRN .)
+
+
+state 22
+
+    (5) list1 -> list1 COMMA . ID
+
+    ID              shift and go to state 27
+
+
+state 23
+
+    (7) rhs -> rhs COMMA atomic .
+
+    COMMA           reduce using rule 7 (rhs -> rhs COMMA atomic .)
+    DOT             reduce using rule 7 (rhs -> rhs COMMA atomic .)
+
+
+state 24
+
+    (16) list2 -> ID .
+
+    RPRN            reduce using rule 16 (list2 -> ID .)
+    COMMA           reduce using rule 16 (list2 -> ID .)
+
+
+state 25
+
+    (13) rhs_formula -> ID LPRN list2 . RPRN
+    (14) list2 -> list2 . COMMA ID
+    (15) list2 -> list2 . COMMA NUM
+
+    RPRN            shift and go to state 28
+    COMMA           shift and go to state 29
+
+
+state 26
+
+    (17) list2 -> NUM .
+
+    RPRN            reduce using rule 17 (list2 -> NUM .)
+    COMMA           reduce using rule 17 (list2 -> NUM .)
+
+
+state 27
+
+    (5) list1 -> list1 COMMA ID .
+
+    RPRN            reduce using rule 5 (list1 -> list1 COMMA ID .)
+    COMMA           reduce using rule 5 (list1 -> list1 COMMA ID .)
+
+
+state 28
+
+    (13) rhs_formula -> ID LPRN list2 RPRN .
+
+    COMMA           reduce using rule 13 (rhs_formula -> ID LPRN list2 RPRN .)
+    DOT             reduce using rule 13 (rhs_formula -> ID LPRN list2 RPRN .)
+
+
+state 29
+
+    (14) list2 -> list2 COMMA . ID
+    (15) list2 -> list2 COMMA . NUM
+
+    ID              shift and go to state 30
+    NUM             shift and go to state 31
+
+
+state 30
+
+    (14) list2 -> list2 COMMA ID .
+
+    RPRN            reduce using rule 14 (list2 -> list2 COMMA ID .)
+    COMMA           reduce using rule 14 (list2 -> list2 COMMA ID .)
+
+
+state 31
+
+    (15) list2 -> list2 COMMA NUM .
+
+    RPRN            reduce using rule 15 (list2 -> list2 COMMA NUM .)
+    COMMA           reduce using rule 15 (list2 -> list2 COMMA NUM .)
+
